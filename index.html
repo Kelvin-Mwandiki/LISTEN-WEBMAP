@@ -39,18 +39,16 @@
         <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
         <script src="js/leaflet-search.js"></script>
-        <script src="data/WRUABoundary_3.js"></script>
-        <script src="data/LISTENBoundary_4.js"></script>
+        <script src="data/WRUABoundary_4.js"></script>
         <script src="data/WAPCWards_5.js"></script>
         <script src="data/LISTENWards_6.js"></script>
-        <script src="data/WRUAOffices_7.js"></script>
-        <script src="data/MotherDemos_8.js"></script>
-        <script src="data/IndigenousChicks_9.js"></script>
+        <script src="data/Listen_Boundary_7.js"></script>
+        <script src="data/WRUAOffices_8.js"></script>
+        <script src="data/MotherDemos_9.js"></script>
+        <script src="data/IndigenousChicks_10.js"></script>
         <script>
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:8, scrollWheelZoom: true
-            }).fitBounds([[38, 01,]]);
-map.once('focus', function() { map.scrollWheelZoom.enable();
+            zoomControl:true, maxZoom:28, minZoom:1
         })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -58,10 +56,10 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
-            primaryLengthUnit: 'feet',
-            secondaryLengthUnit: 'miles',
-            primaryAreaUnit: 'sqfeet',
-            secondaryAreaUnit: 'sqmiles'
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
         });
         measureControl.addTo(map);
         document.getElementsByClassName('leaflet-control-measure-toggle')[0]
@@ -80,7 +78,7 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
             pane: 'pane_GoogleSatellite_0',
             opacity: 1.0,
             attribution: '',
-            minZoom: 8,
+            minZoom: 1,
             maxZoom: 28,
         });
         layer_GoogleSatellite_0;
@@ -91,157 +89,62 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
             pane: 'pane_OpenStreetMap_1',
             opacity: 1.0,
             attribution: '',
-            minZoom: 8,
+            minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
             maxNativeZoom: 19
         });
         layer_OpenStreetMap_1;
         map.addLayer(layer_OpenStreetMap_1);
-        map.createPane('pane_GoogleMaps_2');
-        map.getPane('pane_GoogleMaps_2').style.zIndex = 402;
-        var layer_GoogleMaps_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleMaps_2',
+        map.createPane('pane_EsriLightGray_2');
+        map.getPane('pane_EsriLightGray_2').style.zIndex = 402;
+        var layer_EsriLightGray_2 = L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_EsriLightGray_2',
             opacity: 1.0,
             attribution: '',
-            minZoom: 8,
+            minZoom: 1,
             maxZoom: 28,
         });
-        layer_GoogleMaps_2;
-        map.addLayer(layer_GoogleMaps_2);
-        function pop_WRUABoundary_3(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['WRUA_NAME'] !== null ? autolinker.link(feature.properties['WRUA_NAME'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SRO'] !== null ? autolinker.link(feature.properties['SRO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['status'] !== null ? autolinker.link(feature.properties['status'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Basin'] !== null ? autolinker.link(feature.properties['Basin'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['B_code'] !== null ? autolinker.link(feature.properties['B_code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['path'] !== null ? autolinker.link(feature.properties['path'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+        layer_EsriLightGray_2;
+        map.addLayer(layer_EsriLightGray_2);
+        map.createPane('pane_GoogleMaps_3');
+        map.getPane('pane_GoogleMaps_3').style.zIndex = 403;
+        var layer_GoogleMaps_3 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleMaps_3',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+        });
+        layer_GoogleMaps_3;
+        map.addLayer(layer_GoogleMaps_3);
+        function pop_WRUABoundary_4(feature, layer) {
         }
 
-        function style_WRUABoundary_3_0() {
+        function style_WRUABoundary_4_0() {
             return {
-                pane: 'pane_WRUABoundary_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
+                pane: 'pane_WRUABoundary_4',
+                stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(152,125,183,0.39215686274509803)',
+                fillColor: 'rgba(174,81,107,0.4549019607843137)',
                 interactive: false,
             }
         }
-        map.createPane('pane_WRUABoundary_3');
-        map.getPane('pane_WRUABoundary_3').style.zIndex = 403;
-        map.getPane('pane_WRUABoundary_3').style['mix-blend-mode'] = 'normal';
-        var layer_WRUABoundary_3 = new L.geoJson(json_WRUABoundary_3, {
+        map.createPane('pane_WRUABoundary_4');
+        map.getPane('pane_WRUABoundary_4').style.zIndex = 404;
+        map.getPane('pane_WRUABoundary_4').style['mix-blend-mode'] = 'normal';
+        var layer_WRUABoundary_4 = new L.geoJson(json_WRUABoundary_4, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_WRUABoundary_3',
-            layerName: 'layer_WRUABoundary_3',
-            pane: 'pane_WRUABoundary_3',
-            onEachFeature: pop_WRUABoundary_3,
-            style: style_WRUABoundary_3_0,
+            dataVar: 'json_WRUABoundary_4',
+            layerName: 'layer_WRUABoundary_4',
+            pane: 'pane_WRUABoundary_4',
+            onEachFeature: pop_WRUABoundary_4,
+            style: style_WRUABoundary_4_0,
         });
-        bounds_group.addLayer(layer_WRUABoundary_3);
-        map.addLayer(layer_WRUABoundary_3);
-        function pop_LISTENBoundary_4(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ID_'] !== null ? autolinker.link(feature.properties['ID_'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['COUNTY_NAM'] !== null ? autolinker.link(feature.properties['COUNTY_NAM'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CONST_CODE'] !== null ? autolinker.link(feature.properties['CONST_CODE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CONSTITUEN'] !== null ? autolinker.link(feature.properties['CONSTITUEN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['COUNTY_COD'] !== null ? autolinker.link(feature.properties['COUNTY_COD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_LISTENBoundary_4_0() {
-            return {
-                pane: 'pane_LISTENBoundary_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 6.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(231,113,72,0.0)',
-                interactive: false,
-            }
-        }
-        map.createPane('pane_LISTENBoundary_4');
-        map.getPane('pane_LISTENBoundary_4').style.zIndex = 404;
-        map.getPane('pane_LISTENBoundary_4').style['mix-blend-mode'] = 'normal';
-        var layer_LISTENBoundary_4 = new L.geoJson(json_LISTENBoundary_4, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_LISTENBoundary_4',
-            layerName: 'layer_LISTENBoundary_4',
-            pane: 'pane_LISTENBoundary_4',
-            onEachFeature: pop_LISTENBoundary_4,
-            style: style_LISTENBoundary_4_0,
-        });
-        bounds_group.addLayer(layer_LISTENBoundary_4);
-        map.addLayer(layer_LISTENBoundary_4);
+        bounds_group.addLayer(layer_WRUABoundary_4);
+        map.addLayer(layer_WRUABoundary_4);
         function pop_WAPCWards_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -257,15 +160,10 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
         function style_WAPCWards_5_0() {
             return {
                 pane: 'pane_WAPCWards_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '10,5',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
+                stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(196,60,57,0.17254901960784313)',
+                fillColor: 'rgba(106,103,158,0.41568627450980394)',
                 interactive: true,
             }
         }
@@ -284,62 +182,20 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
         bounds_group.addLayer(layer_WAPCWards_5);
         map.addLayer(layer_WAPCWards_5);
         function pop_LISTENWards_6(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['IEBCWd_No'] !== null ? autolinker.link(feature.properties['IEBCWd_No'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FIRST_IEBC'] !== null ? autolinker.link(feature.properties['FIRST_IEBC'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MIN_IEBCCo'] !== null ? autolinker.link(feature.properties['MIN_IEBCCo'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FIRST_IE_1'] !== null ? autolinker.link(feature.properties['FIRST_IE_1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MIN_IEBCCt'] !== null ? autolinker.link(feature.properties['MIN_IEBCCt'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FIRST_COUN'] !== null ? autolinker.link(feature.properties['FIRST_COUN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FIRST_PROV'] !== null ? autolinker.link(feature.properties['FIRST_PROV'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUM_Male'] !== null ? autolinker.link(feature.properties['SUM_Male'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUM_Female'] !== null ? autolinker.link(feature.properties['SUM_Female'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUM_Total'] !== null ? autolinker.link(feature.properties['SUM_Total'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUM_Househ'] !== null ? autolinker.link(feature.properties['SUM_Househ'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SUM_AREA_S'] !== null ? autolinker.link(feature.properties['SUM_AREA_S'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
         function style_LISTENWards_6_0() {
             return {
                 pane: 'pane_LISTENWards_6',
                 opacity: 1,
-                color: 'grey',
-                dashArray: '',
+                color: 'rgba(90,43,74,1.0)',
+                dashArray: '10,5',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 4.0, 
+                weight: 3.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(152,125,183,0.0)',
+                fillColor: 'rgba(209,114,177,0.0)',
                 interactive: false,
             }
         }
@@ -357,10 +213,42 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
         });
         bounds_group.addLayer(layer_LISTENWards_6);
         map.addLayer(layer_LISTENWards_6);
-        function pop_WRUAOffices_7(feature, layer) {
+        function pop_Listen_Boundary_7(feature, layer) {
+        }
+
+        function style_Listen_Boundary_7_0() {
+            return {
+                pane: 'pane_Listen_Boundary_7',
+                opacity: 1,
+                color: 'rgba(85,86,68,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Listen_Boundary_7');
+        map.getPane('pane_Listen_Boundary_7').style.zIndex = 407;
+        map.getPane('pane_Listen_Boundary_7').style['mix-blend-mode'] = 'normal';
+        var layer_Listen_Boundary_7 = new L.geoJson(json_Listen_Boundary_7, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Listen_Boundary_7',
+            layerName: 'layer_Listen_Boundary_7',
+            pane: 'pane_Listen_Boundary_7',
+            onEachFeature: pop_Listen_Boundary_7,
+            style: style_Listen_Boundary_7_0,
+        });
+        bounds_group.addLayer(layer_Listen_Boundary_7);
+        map.addLayer(layer_Listen_Boundary_7);
+        function pop_WRUAOffices_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>WRUA office</strong><br />' + (feature.properties['WRUA Name'] !== null ? autolinker.link(feature.properties['WRUA Name'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>WRUA Name</strong><br />' + (feature.properties['WRUA Name'] !== null ? autolinker.link(feature.properties['WRUA Name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2"><strong>No of Members</strong><br />' + (feature.properties['No of Members'] !== null ? autolinker.link(feature.properties['No of Members'].toLocaleString()) : '') + '</td>\
@@ -372,49 +260,46 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_WRUAOffices_7_0() {
+        function style_WRUAOffices_8_0() {
             return {
-                pane: 'pane_WRUAOffices_7',
+                pane: 'pane_WRUAOffices_8',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/red-marker.svg',
-            iconSize: [45.0, 45.0]
+            iconUrl: 'markers/blue-marker.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_WRUAOffices_7');
-        map.getPane('pane_WRUAOffices_7').style.zIndex = 407;
-        map.getPane('pane_WRUAOffices_7').style['mix-blend-mode'] = 'normal';
-        var layer_WRUAOffices_7 = new L.geoJson(json_WRUAOffices_7, {
+        map.createPane('pane_WRUAOffices_8');
+        map.getPane('pane_WRUAOffices_8').style.zIndex = 408;
+        map.getPane('pane_WRUAOffices_8').style['mix-blend-mode'] = 'normal';
+        var layer_WRUAOffices_8 = new L.geoJson(json_WRUAOffices_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_WRUAOffices_7',
-            layerName: 'layer_WRUAOffices_7',
-            pane: 'pane_WRUAOffices_7',
-            onEachFeature: pop_WRUAOffices_7,
+            dataVar: 'json_WRUAOffices_8',
+            layerName: 'layer_WRUAOffices_8',
+            pane: 'pane_WRUAOffices_8',
+            onEachFeature: pop_WRUAOffices_8,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_WRUAOffices_7_0(feature));
+                return L.marker(latlng, style_WRUAOffices_8_0(feature));
             },
         });
-        var cluster_WRUAOffices_7 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        var cluster_WRUAOffices_8 = new L.MarkerClusterGroup({showCoverageOnHover: false,
             spiderfyDistanceMultiplier: 2});
-        cluster_WRUAOffices_7.addLayer(layer_WRUAOffices_7);
+        cluster_WRUAOffices_8.addLayer(layer_WRUAOffices_8);
 
-        bounds_group.addLayer(layer_WRUAOffices_7);
-        cluster_WRUAOffices_7.addTo(map);
-        function pop_MotherDemos_8(feature, layer) {
+        bounds_group.addLayer(layer_WRUAOffices_8);
+        cluster_WRUAOffices_8.addTo(map);
+        function pop_MotherDemos_9(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Group Name</strong><br />' + (feature.properties['Group Name'] !== null ? autolinker.link(feature.properties['Group Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>Crops planted</strong><br />' + (feature.properties['Crops planted'] !== null ? autolinker.link(feature.properties['Crops planted'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2"><strong>No of Members</strong><br />' + (feature.properties['No of Members'] !== null ? autolinker.link(feature.properties['No of Members'].toLocaleString()) : '') + '</td>\
@@ -429,43 +314,43 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_MotherDemos_8_0() {
+        function style_MotherDemos_9_0() {
             return {
-                pane: 'pane_MotherDemos_8',
+                pane: 'pane_MotherDemos_9',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/fountain.svg',
-            iconSize: [50.0, 50.0]
+            iconUrl: 'markers/red-marker.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_MotherDemos_8');
-        map.getPane('pane_MotherDemos_8').style.zIndex = 408;
-        map.getPane('pane_MotherDemos_8').style['mix-blend-mode'] = 'normal';
-        var layer_MotherDemos_8 = new L.geoJson(json_MotherDemos_8, {
+        map.createPane('pane_MotherDemos_9');
+        map.getPane('pane_MotherDemos_9').style.zIndex = 409;
+        map.getPane('pane_MotherDemos_9').style['mix-blend-mode'] = 'normal';
+        var layer_MotherDemos_9 = new L.geoJson(json_MotherDemos_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_MotherDemos_8',
-            layerName: 'layer_MotherDemos_8',
-            pane: 'pane_MotherDemos_8',
-            onEachFeature: pop_MotherDemos_8,
+            dataVar: 'json_MotherDemos_9',
+            layerName: 'layer_MotherDemos_9',
+            pane: 'pane_MotherDemos_9',
+            onEachFeature: pop_MotherDemos_9,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_MotherDemos_8_0(feature));
+                return L.marker(latlng, style_MotherDemos_9_0(feature));
             },
         });
-        var cluster_MotherDemos_8 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        var cluster_MotherDemos_9 = new L.MarkerClusterGroup({showCoverageOnHover: false,
             spiderfyDistanceMultiplier: 2});
-        cluster_MotherDemos_8.addLayer(layer_MotherDemos_8);
+        cluster_MotherDemos_9.addLayer(layer_MotherDemos_9);
 
-        bounds_group.addLayer(layer_MotherDemos_8);
-        cluster_MotherDemos_8.addTo(map);
-        function pop_IndigenousChicks_9(feature, layer) {
+        bounds_group.addLayer(layer_MotherDemos_9);
+        cluster_MotherDemos_9.addTo(map);
+        function pop_IndigenousChicks_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>NAME OF THE GROUP</strong><br />' + (feature.properties['NAME OF THE GROUP'] !== null ? autolinker.link(feature.properties['NAME OF THE GROUP'].toLocaleString()) : '') + '</td>\
@@ -480,42 +365,42 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_IndigenousChicks_9_0() {
+        function style_IndigenousChicks_10_0() {
             return {
-                pane: 'pane_IndigenousChicks_9',
+                pane: 'pane_IndigenousChicks_10',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/birds_goose.svg',
-            iconSize: [40.0, 40.0]
+            iconSize: [19.0, 19.0]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_IndigenousChicks_9');
-        map.getPane('pane_IndigenousChicks_9').style.zIndex = 409;
-        map.getPane('pane_IndigenousChicks_9').style['mix-blend-mode'] = 'normal';
-        var layer_IndigenousChicks_9 = new L.geoJson(json_IndigenousChicks_9, {
+        map.createPane('pane_IndigenousChicks_10');
+        map.getPane('pane_IndigenousChicks_10').style.zIndex = 410;
+        map.getPane('pane_IndigenousChicks_10').style['mix-blend-mode'] = 'normal';
+        var layer_IndigenousChicks_10 = new L.geoJson(json_IndigenousChicks_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_IndigenousChicks_9',
-            layerName: 'layer_IndigenousChicks_9',
-            pane: 'pane_IndigenousChicks_9',
-            onEachFeature: pop_IndigenousChicks_9,
+            dataVar: 'json_IndigenousChicks_10',
+            layerName: 'layer_IndigenousChicks_10',
+            pane: 'pane_IndigenousChicks_10',
+            onEachFeature: pop_IndigenousChicks_10,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_IndigenousChicks_9_0(feature));
+                return L.marker(latlng, style_IndigenousChicks_10_0(feature));
             },
         });
-        var cluster_IndigenousChicks_9 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        var cluster_IndigenousChicks_10 = new L.MarkerClusterGroup({showCoverageOnHover: false,
             spiderfyDistanceMultiplier: 2});
-        cluster_IndigenousChicks_9.addLayer(layer_IndigenousChicks_9);
+        cluster_IndigenousChicks_10.addLayer(layer_IndigenousChicks_10);
 
-        bounds_group.addLayer(layer_IndigenousChicks_9);
-        cluster_IndigenousChicks_9.addTo(map);
+        bounds_group.addLayer(layer_IndigenousChicks_10);
+        cluster_IndigenousChicks_10.addTo(map);
             var title = new L.Control();
             title.onAdd = function (map) {
                 this._div = L.DomUtil.create('div', 'info');
@@ -537,15 +422,25 @@ map.once('focus', function() { map.scrollWheelZoom.enable();
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/IndigenousChicks_9.png" /> Indigenous Chicks': cluster_IndigenousChicks_9,'<img src="legend/MotherDemos_8.png" /> Mother Demos ': cluster_MotherDemos_8,'<img src="legend/WRUAOffices_7.png" /> WRUA Offices': cluster_WRUAOffices_7,'<img src="legend/LISTENWards_6.png" /> LISTEN Wards': layer_LISTENWards_6,'<img src="legend/WAPCWards_5.png" /> WAPC Wards': layer_WAPCWards_5,'<img src="legend/LISTENBoundary_4.png" /> LISTEN Boundary': layer_LISTENBoundary_4,'<img src="legend/WRUABoundary_3.png" /> WRUA Boundary': layer_WRUABoundary_3,"Google Maps": layer_GoogleMaps_2,"OpenStreetMap": layer_OpenStreetMap_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/IndigenousChicks_10.png" /> Indigenous Chicks': cluster_IndigenousChicks_10,'<img src="legend/MotherDemos_9.png" /> Mother Demos ': cluster_MotherDemos_9,'<img src="legend/WRUAOffices_8.png" /> WRUA Offices': cluster_WRUAOffices_8,'<img src="legend/Listen_Boundary_7.png" /> Listen_Boundary': layer_Listen_Boundary_7,'<img src="legend/LISTENWards_6.png" /> LISTEN Wards': layer_LISTENWards_6,'<img src="legend/WAPCWards_5.png" /> WAPC Wards': layer_WAPCWards_5,'<img src="legend/WRUABoundary_4.png" /> WRUA Boundary': layer_WRUABoundary_4,"Google Maps": layer_GoogleMaps_3,"Esri Light Gray": layer_EsriLightGray_2,"OpenStreetMap": layer_OpenStreetMap_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: cluster_MotherDemos_8,
+            layer: cluster_MotherDemos_9,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'Group Name'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
+        resetLabels([layer_LISTENWards_6]);
+        map.on("zoomend", function(){
+            resetLabels([layer_LISTENWards_6]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_LISTENWards_6]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_LISTENWards_6]);
+        });
         </script>
     </body>
 </html>
