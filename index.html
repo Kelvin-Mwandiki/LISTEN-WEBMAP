@@ -48,10 +48,10 @@
         <script src="data/IndigenousChicks_10.js"></script>
         <script>
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
+            zoomControl:true, maxZoom:28, minZoom:7
         })
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/LISTEN_PROJECT" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">LISTEN_PROJECT</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
@@ -78,7 +78,7 @@
             pane: 'pane_GoogleSatellite_0',
             opacity: 1.0,
             attribution: '',
-            minZoom: 1,
+            minZoom: 7,
             maxZoom: 28,
         });
         layer_GoogleSatellite_0;
@@ -89,7 +89,7 @@
             pane: 'pane_OpenStreetMap_1',
             opacity: 1.0,
             attribution: '',
-            minZoom: 1,
+            minZoom: 7,
             maxZoom: 28,
             minNativeZoom: 0,
             maxNativeZoom: 19
@@ -102,7 +102,7 @@
             pane: 'pane_EsriLightGray_2',
             opacity: 1.0,
             attribution: '',
-            minZoom: 1,
+            minZoom: 7,
             maxZoom: 28,
         });
         layer_EsriLightGray_2;
@@ -113,7 +113,7 @@
             pane: 'pane_GoogleMaps_3',
             opacity: 1.0,
             attribution: '',
-            minZoom: 1,
+            minZoom: 7,
             maxZoom: 28,
         });
         layer_GoogleMaps_3;
