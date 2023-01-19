@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -39,6 +40,7 @@
         <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
         <script src="js/leaflet-search.js"></script>
+        <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
         <script src="data/WRUABoundary_4.js"></script>
         <script src="data/WAPCWards_5.js"></script>
         <script src="data/LISTENWards_6.js"></script>
@@ -49,6 +51,31 @@
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:7
+        })
+        var drawnItems = L.featureGroup().addTo(map);
+        map.addControl(new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems,
+                poly: {
+                    allowIntersection: false
+                }
+            },
+            draw:{
+                marker: true,
+                circle: true,
+                circlemarker: true,
+                rectangle: true,
+                polyline: true,
+                polygon: {
+                    allowIntersection: true,
+                    showArea: true,
+                }
+            }
+        }))
+        map.on("draw:created", function(e){
+            var type = e.layerType;
+            var layer = e.layer;
+            drawnItems.addLayer(layer);
         })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://snv.org/country/kenya" target="_blank">SNV KENYA</a> &middot; <a href="https://snv.org/project/listen-laikipia-isiolo-samburu-transforming-environment-through-nexus">LISTEN PROJECT</a>');
